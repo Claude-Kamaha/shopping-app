@@ -11,7 +11,7 @@ export class UsersService {
     return this.prismaService.user.create({
       data: {
         ...createUserDto,
-        password: await bcrypt.hash(data.password, 10),
+        password: await bcrypt.hash(createUserDto.password, 10),
       },
     });
   }
