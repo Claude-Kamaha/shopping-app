@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+
+  postgres:
+    image: postgres:17-alpine
+    container_name: shopping-db
+
+    restart: always
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: joelle2000@
+      POSTGRES_DB: shopping-app
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./shopping-backend
+
+    container_name: shopping-api
+
+    depends_on:
+      - postgres
+
+    ports:
+      - "3000:3000"
+
+    environment:
+      DATABASE_URL: postgresql://postgres:joelle2000%40@postgres:5432/shopping-app
+
+volumes:
+  postgres_data:
