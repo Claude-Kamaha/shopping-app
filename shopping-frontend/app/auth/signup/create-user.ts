@@ -9,8 +9,7 @@ export type SignupState = {
   message: string;
 };
 export async function createUser(prevState: SignupState,formData: FormData) : Promise<any> {
-console.log("prevState:", prevState);
-console.log("Form Data:", formData); // Log the FormData object
+
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
